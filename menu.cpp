@@ -1,22 +1,46 @@
 #include <iostream>
+#include "formulas.h"
 
 using namespace std;
 
-float func_b(float a, float b, float c, float d)
+float func_b()
 {
-	return a*b*c*d;
+	return 3.4;
 }
 
-float func_a(float a, float b, float c, float d)
+float traccion()
 {
-	return a+b+c+d;
+	float e, sigma_o, sigma_ts, lo, df, lf, epsilon, s;
+	float f,area, diametro;
+
+	cout<<"Modulo de Young (MPa)>"<<endl;
+	cin>>e;
+	cout<<"Limite Elastico (MPa)>"<<endl;
+	cin>>sigma_o;
+	cout<<"Resistencia a la traccion (MPa)>"<<endl;
+	cin>>sigma_ts;
+	cout<<"==Esfuerzo:\nLongitud (mm)>"<<endl;
+	cin>>lo;
+	cout<<"Alargamiento [D] (MPa)>"<<endl;
+	cin>>df;
+	cout<<"==Diametro:\nCarga (kN)>"<<endl;
+	cin>>f;
+
+	lf=lo+df;
+	epsilon=esfuerzo(lo,lf);
+	s=sigma(e, epsilon);
+	cout<<"Esfuerzo: "<<s<<endl;
+
+	area=area_fs(f, sigma_o);
+	diametro=d_api(area);
+	cout<<"Diametro (mm): "<<diametro<<endl;
 }
 
 int select()
 {
 	int s;
 	
-	cout<<"Elija una operacion:\n"<<"1. Sumar\n"<<"2. Multiplicar\n"<<"3. Salir"<<endl; //los \n indican una nueva linea; estas son las opciones del menu
+	cout<<"Elija una operacion:\n"<<"1. Traccion\n"<<"2. Poisson\n"<<"3. Salir"<<endl; //los \n indican una nueva linea; estas son las opciones del menu
 	cin>>s;
 	
 	return s;
@@ -28,13 +52,11 @@ int menu()
 	
 	switch(s)
 	{
-		case 1: ans=func_a(1,2,3,4); break; //operacion uno, toma cuatro parametros numericos
-		case 2: ans=func_b(2,3,1,4); break; //operacion dos igual a la primera
+		case 1: ans=traccion(); break; //operacion uno, toma cuatro parametros numericos
+		case 2: ans=func_b(); break; //operacion dos igual a la primera
 		case 3: cout<<"Salir"<<endl;
 		default: cout<<"Opcion no elegible"<<endl;
 	}
-	
-	cout<<"El resultado es: "<<ans<<endl;
 	
 	return s;
 }
