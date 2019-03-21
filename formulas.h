@@ -30,7 +30,7 @@ float f_factor_seg(float f, float fs){
 	return f*fs;
 }
 
-float l_f_se(float sigma, float e, float l_o,){
+float l_f_se(float sigma, float e, float l_o){
 	return (sigma/e)*l_o+l_o;
 }
 
@@ -38,6 +38,6 @@ float V(float e_x, float e_y){
 	return e_y/e_x;
 }
 
-ey_vex(float V, float e_x){
+float ey_vex(float V, float e_x){
 	return V*e_x;
 }
